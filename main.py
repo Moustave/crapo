@@ -88,14 +88,17 @@ def main():
     done = False
     response= ""
     emotion = "content"
-
+    image = pg.image.load("crapo 2.png")
+    image = pg.transform.scale(image, (360,600))
+    image_rect = image.get_rect()
+    
     while not done:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 done = True
             if event.type == pg.KEYDOWN:
                 if active:
-                    if event.key == pg.K_RETURN:
+                    if event.key == pg.K_RETURN and text != '':
                         print(text)
                         text2 = text
                         text = ''
@@ -109,7 +112,13 @@ def main():
                         else:
                             response = "Je n'ai pas compris"
                             emotion = "trouble"
-                        
+                        if emotion=="content":
+                            image = pg.image.load("crapo 2.png")
+                        elif emotion == "triste":
+                            image = pg.image.load("crapo 1.png")
+                        else:
+                            image = pg.image.load("crapo 3.png")
+                        image = pg.transform.scale(image, (360,600))
                         
                     elif event.key == pg.K_BACKSPACE:
                         text = text[:-1]
@@ -122,12 +131,20 @@ def main():
         
         #draw pale pink rectangle in the middle of the screen
         pg.draw.rect(screen, screen_bg_color, screen_rect, 0)
+
+        #draw crapo
+        screen.blit(image, (pg.Rect(image_rect).move((460,0))))
         
         # input_box background
+        pg.draw.rect(screen, screen_bg_color, pg.Rect(460, 575, 360, 70), 0)
         pg.draw.rect(screen, (255,255,255), input_box, 0)
-        
+
         #draw crapo bubble as a rounded rectangle
         pg.draw.rect(screen, (255,255,255), crapo_bubble, 0, 25)
+
+        
+        
+        
 
         # Render the current text.
         displayedText = ""
@@ -165,14 +182,20 @@ def main():
                 
 
             resp_surface = font2.render(" ".join(displayed_resp), True, color)
-            pg.display.flip()
+            
             
             # Blit the response.
             screen.blit(resp_surface, (500, 110+j*35))
             j+=1
             
+
+        
+        
         pg.display.flip()
+        pg.display.update()
         clock.tick(30)
+
+        
 
 
 if __name__ == '__main__':
