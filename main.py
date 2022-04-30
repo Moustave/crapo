@@ -21,7 +21,8 @@ import os
 import openai
 
 
-openai.api_key = "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"
+openai.api_key = ""
+
 
 def getCrapoResponse(question):
     r = openai.Completion.create(
