@@ -1,7 +1,9 @@
 --- 
 steps: 
-  - 
-    args: 
-      - |
-        compute ssh leo_cuvelier@eu-west1crapo-prod --zone=europe-west1-b --project=crapo-348812 --command="cd crapo && git pull"
-    name: gcr.io/cloud-builders/gcloud
+- id: git pull
+  name: gcr.io/cloud-builders/gcloud
+  entrypoint: /bin/sh
+  args: 
+  - '-c'
+  - |
+    gcloud compute ssh leo_cuvelier@eu-west1crapo-prod --zone=europe-west1-b --project=crapo-348812 --command="cd crapo && git pull"
