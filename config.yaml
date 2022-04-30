@@ -1,4 +1,4 @@
 steps:
 - name: gcr.io/cloud-builders/gcloud
   args: |
-  gcloud compute ssh eu-west1crapo-prod  --command="cd /home/leo_cuvelier/crapo && git pull"
+  compute ssh eu-west1crapo-prod  --command="cd /home/leo_cuvelier/crapo && git pull"
